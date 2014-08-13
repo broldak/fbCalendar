@@ -6,8 +6,12 @@ body {
   float: left;
 }
 
+#calendar-wrap {
+  padding-top: 10px;
+}
+
 #time-container {
-  width: 50px;
+  width: 100px;
   height: 720px;
 }
 
@@ -18,4 +22,26 @@ body {
   padding-right: 10px;
   background-color: #dedede;
   border-left: 1px solid #ccc;
+  margin-top: 8px;
+}
+
+.time-list {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.time-list .time-item {
+  font-size: 10px;
+  color: #999;
+  height: 30px;
+}
+
+.time-list .time-item:nth-child(even) {
+  font-size: 10px;
+}
+
+.time-list .time-number {
+  font-size: 12px;
+  font-weight: 800;
+  color: #666;
 }

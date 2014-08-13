@@ -1,0 +1,12 @@
+body {
+  font-family: "Lucida Grande";
+}
+
+#calendar-container {
+  width: 600px;
+  height: 720px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #dedede;
+  border-left: 1px solid #ccc;
+}

@@ -22,7 +22,8 @@ body {
   padding-right: 10px;
   background-color: #dedede;
   border-left: 1px solid #ccc;
-  margin-top: 8px;
+  margin-top: 5px;
+  position: relative;
 }
 
 .time-list {
@@ -44,4 +45,40 @@ body {
   font-size: 12px;
   font-weight: 800;
   color: #666;
+}
+
+.calendar-event:before {
+  width: 5px;
+  background-color: #3b5998;
+  height: 100%;
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0px;
+}
+
+.calendar-event {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  height: 100px;
+  width: 595px;
+  position: absolute;
+  top: 30px;
+  font-size: 12px;
+}
+
+.calendar-event .event-inner {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.event-inner .event-name {
+  color: #3b5998;
+  font-weight: 800;
+}
+
+.event-inner .event-location {
+  padding-top: 5px;
+  font-size: 10px;
+  color: #999;
 }

@@ -40,20 +40,20 @@ var Calendar = (function(){
     //TODO: add checking for overlaps, etc.
     //adds element to the DOM.
     createDomElement: function(event, index){
-      var maxDepth,
+      var totalDepth,
           width,
           $elem = $(domElement),
           top = event.start + 'px',
           height = event.end - event.start + 'px';
 
       this.findOverlaps(index);
-      maxDepth = Math.max(event.forward.length, event.backward.length);
-      debugger;
-      width = (maxWidth / (maxDepth+1)) >> 0;
+      totalDepth = event.forward.length + event.backward.length;
+      width = (maxWidth / (totalDepth+1)) >> 0;
 
       $elem.css('top', top);
       $elem.css('height', height);
       $elem.css('width', width);
+      $elem.css('left', (event.backward.length*width)+10);
 
       this.$calendarContainer.append($elem);
     },
@@ -84,7 +84,7 @@ function layOutDay(events) {
 }
 
 function testLayOutDay() {
-  var events = [{start: 60, end: 120}, {start: 70, end: 360}, {start: 30, end: 90}];
+  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 40, end: 100}];
 
   layOutDay(events);
 }

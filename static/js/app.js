@@ -42,12 +42,18 @@ var Calendar = (function(){
     createDomElement: function(event, index){
       var totalDepth,
           width,
+          directOverlaps,
           $elem = $(domElement),
           top = event.start + 'px',
           height = event.end - event.start - 1 + 'px';
 
       this.findOverlaps(index);
+
+      console.log(event);
       //console.log(event);
+      directOverlaps = this.findDirectOverlaps(event);
+
+      console.log(directOverlaps);
 
       totalDepth = event.forward.length + event.backward.length;
       width = (maxWidth / (totalDepth+1)) >> 0;
@@ -55,7 +61,7 @@ var Calendar = (function(){
       $elem.css('top', top);
       $elem.css('height', height);
       $elem.css('width', width);
-      $elem.css('left', (event.backward.length*width)+10);
+      $elem.css('left', (directOverlaps*width)+10);
 
       this.$calendarContainer.append($elem);
     },
@@ -76,6 +82,28 @@ var Calendar = (function(){
           }
         }
       }, this));
+    },
+
+    eventsOverlap: function(event1, event2){
+      return (event2.start >= event1.start && event2.start < event1.end);
+    },
+
+    findDirectOverlaps: function(event){
+      var directOverlaps = 0,
+          current = event,
+          originalEvent = event;
+
+      while (current.backward.length > 0) {
+        //console.log(current, current.backward[0]);
+        $.each(current.backward, $.proxy(function(index, evt){
+          if (this.eventsOverlap(evt, originalEvent)) {
+            directOverlaps+=1;
+          }
+        }, this));
+        current = current.backward[0];
+      }
+
+      return directOverlaps;
     }
   }
 });
@@ -86,8 +114,8 @@ function layOutDay(events) {
 }
 
 function testLayOutDay() {
-  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 70, end: 121}, {start: 40, end: 120},
-                {start: 120, end: 180}];
+  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 70, end: 120}, {start: 40, end: 120},
+                {start: 160, end: 210}, {start: 180, end: 300}];
 
   layOutDay(events);
 }

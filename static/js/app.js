@@ -47,7 +47,7 @@ var Calendar = (function(){
           height = event.end - event.start - 1 + 'px';
 
       this.findOverlaps(index);
-      console.log(event);
+      //console.log(event);
 
       totalDepth = event.forward.length + event.backward.length;
       width = (maxWidth / (totalDepth+1)) >> 0;
@@ -69,7 +69,7 @@ var Calendar = (function(){
       $.each(this.events, $.proxy(function(idx, current){
         if (idx !== index && idx > index) {
           if (current.start >= event.start && current.start < event.end) {
-            console.log(index, event, idx, current);
+            //console.log(index, event, idx, current);
             event.forward.push(current);
             current.backward.push(event);
             //console.log('OVERLAP', event, current);
@@ -86,8 +86,8 @@ function layOutDay(events) {
 }
 
 function testLayOutDay() {
-  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 40, end: 105}, {start: 40, end: 100},
-                {start: 120, end: 180}, {start: 160, end: 210}, {start: 170, end: 300}];
+  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 70, end: 121}, {start: 40, end: 120},
+                {start: 120, end: 180}];
 
   layOutDay(events);
 }

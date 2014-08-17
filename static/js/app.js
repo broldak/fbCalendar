@@ -21,7 +21,6 @@ var Calendar = (function(){
 
       this.events = events;
       this.$calendarContainer = $('#calendar-container');
-
       this.addToDom();
     },
 
@@ -37,8 +36,8 @@ var Calendar = (function(){
       }, this));
     },
 
-    //TODO: add checking for overlaps, etc.
     //adds element to the DOM.
+    //TODO: fix last few bugs
     createDomElement: function(event, index){
       var totalDepth,
           width,
@@ -54,6 +53,23 @@ var Calendar = (function(){
       directOverlaps = this.findDirectOverlaps(event);
 
       console.log(directOverlaps);
+
+      /* this is a small version of a fix for the bug where the last event
+       * conflicts with an event that is part of another tree
+      if (event.backward[0] && event.forward[0]) {
+        if (this.eventsOverlap(event.backward[0], event.forward[0])) {
+          totalDepth = event.forward.length + event.backward.length;
+        }
+
+        else {
+          totalDepth = event.backward.length;
+        }
+      }
+
+      else {
+        totalDepth = event.backward.length + event.forward.length;
+      }
+      */
 
       totalDepth = event.forward.length + event.backward.length;
       width = (maxWidth / (totalDepth+1)) >> 0;
@@ -114,8 +130,8 @@ function layOutDay(events) {
 }
 
 function testLayOutDay() {
-  var events = [{start: 60, end: 120}, {start: 30, end: 90}, {start: 70, end: 120}, {start: 40, end: 120},
-                {start: 160, end: 210}, {start: 180, end: 300}];
+  var events = [{start: 60, end: 121}, {start: 30, end: 121}, {start: 70, end: 125}, {start: 40, end: 121},
+                {start: 120, end: 211}, {start: 210, end: 300}];
 
   layOutDay(events);
 }
